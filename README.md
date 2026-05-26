@@ -81,7 +81,7 @@ This skill is in active development. If you spot a false negative or a misclassi
 
 ## Maintainer
 
-Built by Gareth Downs / M&G Collective. Practitioner-led, designed by someone who has had to write ROPAs from scratch and would rather not do that again.
+Built by Gareth Downs, someone who has had to write ROPAs from scratch and would rather not do that again.
 
 ## Licence
 
