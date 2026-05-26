@@ -75,19 +75,21 @@ Identify every external service that personal data flows to. Scan:
 
 Use the lookup table in `references/processors.md` to identify known processors, their typical role (controller/processor/joint controller), their data residency, and applicable transfer mechanisms. The table covers common ones: Stripe, Segment, Mixpanel, Amplitude, Sentry, PostHog, Google Analytics, Meta Pixel, Hotjar, Intercom, HubSpot, Mailchimp, SendGrid, Twilio, AWS, GCP, Azure, OpenAI, Anthropic, Cohere, Pinecone, Supabase, Auth0, Clerk, and similar.
 
-If a service is found that is not in the lookup table, flag it as "UNKNOWN - manual review required" and note what data appears to be sent to it.
+If a service is found that is not in the lookup table, flag it as "UNKNOWN - reviewer to confirm" and note what data appears to be sent to it.
 
 ### 3. International transfers
 
 For each third party identified, determine likely transfer status:
 - UK/EEA data residency (no transfer)
-- US transfer (most common, flag for adequacy/SCCs/IDTA)
+- US transfer (most common, record DPF status separately from the contractual fallback)
 - Other third country transfer
 - Unknown residency (flag for review)
 
-Output to `transfer-register.csv` with columns: Service, Purpose, Data categories transferred, Destination country, Likely mechanism (SCCs / UK IDTA / Adequacy / DPF / Unknown), Confidence.
+Read `references/transfer-mechanisms.md` before populating the transfer register. The file explains why DPF status and the contractual fallback are recorded separately, how to set defaults that protect against a stale DPF list, when a Transfer Risk Assessment is required, and what the Confidence column measures under this schema.
 
-Always note that this is based on the *default* data residency of the provider. Many providers offer EU-only options that the codebase cannot see. Flag this in the methodology file.
+Output to `transfer-register.csv` with columns: Service, Purpose, Data categories transferred, Destination country/region, DPF status (reviewer to verify), Contractual fallback if DPF not relied upon, TRA required if contractual fallback used, Confidence, Notes, Source files.
+
+Always note that this is based on the default data residency of the provider. Many providers offer EU-only options that the codebase cannot see. Flag this in the methodology file.
 
 ### 4. AI and LLM specific processing
 
@@ -209,6 +211,12 @@ In `summary.md`, include a "Privacy notice starting points" section that lists, 
 - Where it appears to go (countries)
 - AI/automated processing (if any)
 
+For each AI/LLM service detected, name the provider explicitly. The ICO's guidance on generative AI pushes controllers toward naming third party AI services in privacy notices rather than describing them as a generic "AI service". Use the following template for the AI processing bullet, filling in each placeholder from the findings in `ai-processing.md` and the transfer register:
+
+`We use [PROVIDER NAME] (a [REGION]-based AI service provider) to [DESCRIBE PURPOSE]. When we use this service, we send: [DATA CATEGORIES]. We do not send any data you submit to us [verify against actual data flow; amend if data subjects' submitted content is also sent]. [PROVIDER NAME] does not use the data we send to train its models [confirm against current provider terms]. The data is transferred to [COUNTRY]. We rely on [TRANSFER MECHANISM - confirmed by reviewer] for this transfer.`
+
+The bracketed cues are instructions to the drafter, not text to leave in the published privacy notice. Where the skill cannot determine the answer from code alone, write `UNKNOWN - reviewer to confirm` in the relevant placeholder rather than guessing.
+
 This is NOT a privacy notice. It is raw material a drafter can use as a starting point, framed accordingly.
 
 ## What this skill explicitly does NOT do
@@ -240,8 +248,9 @@ State these in `methodology.md`:
 - `references/processors.md` - lookup table of common third party services with role, residency, and transfer notes
 - `references/scanning-strategy.md` - stack-specific scanning advice (Next.js, Django, Rails, etc.)
 - `references/lawful-basis.md` - how to suggest a lawful basis with confidence indicators; covers PECR overlay and AADC
+- `references/transfer-mechanisms.md` - how to record DPF status separately from the contractual fallback (UK Addendum to EU SCCs or UK IDTA), when a TRA is required, and what the Confidence column measures. **Read this before populating the transfer register.**
+- `references/personal-data-vs-business-contact.md` - the distinction between personal data of natural persons and information about legal entities; how to split the analysis where both are present
 - `assets/ropa-template.xlsx` - empty ICO-aligned ROPA template (the only ROPA output format; green/blue colour-coded)
 - `assets/transfer-register-template.csv` - empty transfer register template
-- `assets/output-header.md` - the disclaimer block to prepend to outputs
 
 Read references on demand. Do not load all of them upfront.

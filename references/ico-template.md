@@ -15,10 +15,10 @@ The ICO recommends a "broad to narrow" approach. Each ROPA entry should start wi
 
 For a typical consumer app codebase, business functions might include:
 - Account management
-- Product delivery (the core feature, e.g. AI-driven recommendations, content generation, search)
+- Service delivery (the core feature, e.g. AI-driven recommendations, content generation, search)
 - Payments and subscription
 - Customer support
-- Marketing
+- Marketing and growth
 - Product analytics
 - Security and fraud prevention
 
@@ -26,7 +26,7 @@ Each business function becomes one or more rows in the ROPA. Do not produce a ro
 
 ## Mandatory fields (Article 30(1))
 
-These columns are required. Always populate them, even if the value is "UNKNOWN - manual review required".
+These columns are required. Always populate them, even if the value is "UNKNOWN - reviewer to confirm".
 
 1. **Controller name** - the organisation that determines the purposes and means of the processing.
 2. **Controller contact details** - usually email, postal address, or website.

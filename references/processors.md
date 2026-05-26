@@ -6,7 +6,7 @@ For each entry: detection signals → service name → typical role → default 
 
 ## Analytics and product analytics
 
-- `_ga`, `gtag`, `googletagmanager`, `google-analytics`, `analytics.google.com` → **Google Analytics** → processor (typically) → US → DPF / SCCs → EU regions available (GA4 EU); flag for IP anonymisation review
+- `_ga`, `gtag`, `googletagmanager`, `google-analytics`, `analytics.google.com` → **Google Analytics** → processor (typically) → US → contractual fallback (SCCs default); DPF possible if recipient certified, reviewer to verify → EU regions available (GA4 EU); flag for IP anonymisation review
 - `mixpanel`, `mixpanel-browser`, `MIXPANEL_TOKEN` → **Mixpanel** → processor → US → SCCs → EU residency available on Enterprise
 - `amplitude`, `@amplitude/analytics-browser` → **Amplitude** → processor → US → SCCs → EU residency available
 - `posthog`, `posthog-js`, `posthog-node` → **PostHog** → processor → US/EU (configurable) → SCCs if US → Self-hosted option exists
@@ -18,12 +18,12 @@ For each entry: detection signals → service name → typical role → default 
 
 ## Advertising and marketing
 
-- `fbq`, `_fbp`, `connect.facebook.net`, `meta-pixel` → **Meta Pixel** → joint controller (per CJEU Fashion ID) → US → DPF/SCCs → Joint controller status changes ROPA/notice obligations
-- `gtag('event', ...)` with `send_to: 'AW-...'` → **Google Ads** → joint controller → US → DPF/SCCs
-- `linkedin_insight`, `_linkedin_data_partner_id` → **LinkedIn Insight Tag** → joint controller → US/IE → DPF/SCCs
+- `fbq`, `_fbp`, `connect.facebook.net`, `meta-pixel` → **Meta Pixel** → joint controller (per CJEU Fashion ID) → US → contractual fallback (SCCs default); DPF possible if recipient certified, reviewer to verify → Joint controller status changes ROPA/notice obligations
+- `gtag('event', ...)` with `send_to: 'AW-...'` → **Google Ads** → joint controller → US → contractual fallback (SCCs default); DPF possible if recipient certified, reviewer to verify
+- `linkedin_insight`, `_linkedin_data_partner_id` → **LinkedIn Insight Tag** → joint controller → US/IE → contractual fallback (SCCs default); DPF possible if recipient certified, reviewer to verify
 - `ttq`, `tiktok-pixel` → **TikTok Pixel** → joint controller → US/SG/IE → SCCs → Data also flows to China per TikTok policies (heightened scrutiny)
 - `klaviyo` → **Klaviyo** → processor → US → SCCs
-- `mailchimp`, `MAILCHIMP_API_KEY` → **Mailchimp** → processor → US → DPF/SCCs
+- `mailchimp`, `MAILCHIMP_API_KEY` → **Mailchimp** → processor → US → contractual fallback (SCCs default); DPF possible if recipient certified, reviewer to verify
 - `sendgrid`, `@sendgrid/mail` → **SendGrid (Twilio)** → processor → US → SCCs
 - `mailgun` → **Mailgun** → processor → US/EU (configurable) → SCCs if US
 - `postmark`, `postmarkapp` → **Postmark** → processor → US → SCCs → EU region available
@@ -34,7 +34,7 @@ For each entry: detection signals → service name → typical role → default 
 ## Payments
 
 - `stripe`, `@stripe/stripe-js`, `STRIPE_SECRET_KEY` → **Stripe** → processor → US (with EU sub-processors) → SCCs → PCI scope; flag card data handling
-- `paypal`, `@paypal/checkout-server-sdk` → **PayPal** → controller (for the payment) → US → DPF/SCCs → Paypal is independent controller for the transaction
+- `paypal`, `@paypal/checkout-server-sdk` → **PayPal** → controller (for the payment) → US → contractual fallback (SCCs default); DPF possible if recipient certified, reviewer to verify → Paypal is independent controller for the transaction
 - `braintree` → **Braintree (PayPal)** → processor → US → SCCs
 - `adyen` → **Adyen** → processor → Netherlands (EU) → no transfer → Good GDPR position
 - `square`, `@square/web-sdk` → **Square** → processor → US → SCCs
@@ -145,7 +145,7 @@ For each entry: detection signals → service name → typical role → default 
 This is not exhaustive. New SDKs appear constantly. For unknown packages:
 
 1. Note the package name and what it appears to do
-2. Flag as "UNKNOWN - manual review required"
+2. Flag as "UNKNOWN - reviewer to confirm"
 3. Suggest the user check: provider data residency, sub-processors list, presence of DPA/SCCs/IDTA, default vs configurable region
 
 Some packages are libraries with no data flow (e.g. `lodash`, `dayjs`, `zod`). Don't flag these.
