@@ -76,6 +76,17 @@ The test for distinguishing Contract from Legitimate interests in these cases: c
 - **Recommendation engines** → Could be Contract (service feature) or Legitimate interests (enhancement). Apply the "can the user enjoy the service without this?" test.
 - **Data sharing with affiliates** → Depends on relationship, contracts, and notice given. Confidence: LOW.
 
+### Listings, directories, and supplier databases
+
+Listings, directories, supplier databases, and contact registers frequently contain a mix of personal data of natural persons (sole traders, partnerships of two or three, named contacts at corporate entities) and information that relates only to legal entities (limited company names, registered offices, generic info@ inboxes). UK GDPR applies to the personal data portion. It does not apply to the legal entity portion.
+
+The skill must not collapse this into a single Legitimate interests analysis. It must split the lawful basis suggestion into two bullets in the relevant ROPA row or summary section:
+
+- **Personal data portion**: Legitimate interests is the typical basis for B2B contact data, with a LIA. Contract under Article 6(1)(b) may apply where there is a direct contractual relationship with the named individual's organisation. Article 21 right to object applies and must be surfaced in the privacy notice starting points.
+- **Legal entity portion**: UK GDPR does not apply. PECR may overlay if the controller uses the legal entity information for direct marketing by electronic mail. Regulation 23 sets identity and opt-out requirements for marketing to corporate subscribers (separate from the Regulation 22 consent requirement that applies to individual subscribers).
+
+Where the codebase does not distinguish between sole traders, partnerships, and limited companies in the underlying schema, the skill flags this and directs the reviewer to confirm the actual composition of the data set. See `personal-data-vs-business-contact.md` for the full distinction, worked examples, and the PECR Regulations 22 and 23 treatment of individual and corporate subscribers.
+
 ## PECR overlay - when consent is required regardless of UK GDPR basis
 
 PECR applies in addition to UK GDPR. Where PECR applies, its consent requirements operate independently of Article 6. Three areas matter for most app codebases:
@@ -104,7 +115,7 @@ The skill should flag:
 
 For these, the lawful basis suggestion in the ROPA should be: `Legitimate interests under UK GDPR Art 6(1)(f), BUT PECR Regulation 6 consent likely required for the SDK to operate at all. Confirm consent management is in place.`
 
-### PECR Regulation 22 - unsolicited marketing by electronic mail
+### PECR Regulations 22 and 23 - unsolicited marketing by electronic mail
 
 Covers email, SMS, in-app push notifications used for marketing purposes, and similar electronic marketing.
 
@@ -115,7 +126,7 @@ The B2C soft opt-in exception applies where ALL of these are true:
 - Opt-out was offered at the point of data collection
 - Opt-out is offered in every subsequent message
 
-For B2B email marketing to corporate subscribers, the rules differ (legitimate interests is more often available), but in-app and SMS are treated the same as B2C.
+For B2B email marketing to corporate subscribers, the rules differ. PECR Regulation 23 sets identity and opt-out requirements for corporate subscribers but does not require consent. Legitimate interests under UK GDPR is more often available for the underlying processing. In-app and SMS are treated the same as B2C.
 
 **Push notifications need particular care.** Transactional push (the order has shipped, the cron job completed) is typically supportable on Contract or Legitimate interests. Push notifications that promote features, encourage re-engagement, or upsell premium tiers are likely electronic marketing and likely require PECR Regulation 22 consent.
 
@@ -150,7 +161,7 @@ Where lawful basis is Legitimate interests (or Public task), the data subject ha
 
 The skill must surface this in the ROPA row:
 - Where Legitimate interests is suggested, the "Information rights process" column should note that Article 21 right-to-object applies
-- The privacy notice starting points should include a "you have the right to object to [activity]" line for each Legitimate interests activity
+- The privacy notice starting points should include a "you have the right to object to [activity]" line for each Legitimate interests activity (see the "Privacy notice scaffolding" section of `SKILL.md` for where this section lives in the output)
 - Where the activity is direct marketing, the right is absolute and the controller must stop processing on objection
 
 ## Article 22 (automated decision-making)
