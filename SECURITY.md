@@ -12,7 +12,7 @@ The most likely "security" issues are:
 
 ## How to report a suspected vulnerability
 
-Email [EMAIL TO BE FILLED] with a description, reproduction steps, and the skill version (release tag or commit hash) you observed it on. You can expect an acknowledgement within five working days.
+Email gareth@mgcollective.co with a description, reproduction steps, and the skill version (release tag or commit hash) you observed it on. You can expect an acknowledgement within five working days.
 
 Please do not open a public issue for suspected vulnerabilities until they have been triaged.
 
